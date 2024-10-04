@@ -1,6 +1,6 @@
 {
   "name": "django_slack",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "create a Slack App inside a Django application.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
