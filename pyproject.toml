@@ -1,5 +1,5 @@
 [project]
-name = "django-slackbot"
+name = "django-bubblehouse-slackbot"
 version = "0.1.0"
 description = "Create a Slack bot inside a Django application"
 readme = "README.md"
