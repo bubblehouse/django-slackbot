@@ -28,7 +28,7 @@ jobs:
             @semantic-release/git@10.0.1
             conventional-changelog-conventionalcommits@8.0.0
             semantic-release@24.1.2
-            semantic-release-replace-plug@1.2.7
+            semantic-release-replace-plugin@1.2.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
