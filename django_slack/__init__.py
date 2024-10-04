@@ -1,2 +1,7 @@
 # -*- coding: utf-8 -*-
-default_app_config = 'glados.core.apps.CoreConfig'
+__version__ = "2.21.6"
+
+def get_version():
+    return __version__
+
+default_app_config = 'django_slack.apps.DjangoSlackConfig'
