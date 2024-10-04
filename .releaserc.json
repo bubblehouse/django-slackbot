@@ -24,13 +24,13 @@
         "replacements": [
           {
             "files": [
-              "django_slack_bot/__init__.py"
+              "django_slackbot/__init__.py"
             ],
             "from": "__version__ = \".*\"",
             "to": "__version__ = \"${nextRelease.version}\"",
             "results": [
               {
-                "file": "django_slack_bot/__init__.py",
+                "file": "django_slackbot/__init__.py",
                 "hasChanged": true,
                 "numMatches": 1,
                 "numReplacements": 1
@@ -46,7 +46,7 @@
       "@semantic-release/git",
       {
         "assets": [
-          "django_slack_bot/__init__.py",
+          "django_slackbot/__init__.py",
           "package.json",
           "package-lock.json",
           "CHANGELOG.md"
@@ -57,7 +57,7 @@
       "@semantic-release/github",
       {
         "assets": [
-          "dist/django_slack_bot-*.gz"
+          "dist/django_slackbot-*.gz"
         ]
       }
     ]

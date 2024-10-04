@@ -2,4 +2,4 @@
 from django.apps import AppConfig
 
 class DjangoSlackBotConfig(AppConfig):
-    name = 'django_slack_bot'
+    name = 'django_slackbot'

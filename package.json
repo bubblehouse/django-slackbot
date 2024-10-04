@@ -1,5 +1,5 @@
 {
-  "name": "django_slack_bot",
+  "name": "django_slackbot",
   "version": "1.0.1",
   "description": "create a Slack App inside a Django application.",
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/philchristensen/django-slack-bot"
+    "url": "https://github.com/philchristensen/django-slackbot"
   },
   "author": "Phil Christensen",
   "license": "AGPL-3.0-only",

@@ -59,7 +59,7 @@ wheels = [
 ]
 
 [[package]]
-name = "django-slack-bot"
+name = "django-slackbot"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
