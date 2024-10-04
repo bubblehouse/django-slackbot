@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/philchristensen/django-slackbot/compare/v1.0.2...v1.0.3) (2024-10-04)
+
+### Bug Fixes
+
+* rename app, already taken ([4a1a7a8](https://github.com/philchristensen/django-slackbot/commit/4a1a7a86f328c8dce9bb3ddba9488a18b876edea))
+
 ## [1.0.2](https://github.com/philchristensen/django-slackbot/compare/v1.0.1...v1.0.2) (2024-10-04)
 
 ### Bug Fixes
