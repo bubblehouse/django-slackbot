@@ -38,8 +38,7 @@ class Command(BaseCommand):
             if 'warp' in kwargs:
                 now += datetime.timedelta(seconds=count * 60)
             try:
-                for value in self.run_pending(executor, now=now):
-                    yield value
+                yield from self.run_pending(executor, now=now)
             except Exception as e:  # pylint: disable=broad-except
                 log.info(f"Error running pending job: {e}")
             try:

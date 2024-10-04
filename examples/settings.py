@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for examples project.
 
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_slack'
+    'django_slack_bot'
 ]
 
 MIDDLEWARE = [

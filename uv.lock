@@ -59,9 +59,9 @@ wheels = [
 ]
 
 [[package]]
-name = "django-slack"
+name = "django-slack-bot"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "commonmark-slack" },
     { name = "croniter" },
