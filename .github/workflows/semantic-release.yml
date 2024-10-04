@@ -1,7 +1,7 @@
 ---
 name: semantic-release
 run-name: Run the semantic-relase process
-on: [pull_request]
+on: [push]
 jobs:
   release:
     runs-on: ubuntu-latest
