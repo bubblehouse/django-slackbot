@@ -65,6 +65,7 @@
           "django_slackbot/__init__.py",
           "package.json",
           "package-lock.json",
+          "pyproject.toml",
           "CHANGELOG.md"
         ]
       }
