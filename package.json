@@ -1,5 +1,5 @@
 {
-  "name": "django_slackbot",
+  "name": "django-bubblehouse-slackbot",
   "version": "1.0.2",
   "description": "create a Slack App inside a Django application.",
   "scripts": {
