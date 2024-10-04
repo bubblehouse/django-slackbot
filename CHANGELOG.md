@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/philchristensen/django-slackbot/compare/v1.0.4...v1.0.5) (2024-10-04)
+
+### Bug Fixes
+
+* update pyproject.toml version ([a8c9b35](https://github.com/philchristensen/django-slackbot/commit/a8c9b35de509251f80036e3df518d4c4a1c8da89))
+
 ## [1.0.4](https://github.com/philchristensen/django-slackbot/compare/v1.0.3...v1.0.4) (2024-10-04)
 
 ### Bug Fixes
