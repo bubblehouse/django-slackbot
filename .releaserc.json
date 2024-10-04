@@ -41,12 +41,7 @@
         ]
       }
     ],
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "python3 setup.py sdist"
-      }
-    ],
+    "semantic-release-pypi",
     [
       "@semantic-release/git",
       {

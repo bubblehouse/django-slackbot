@@ -31,5 +31,5 @@ jobs:
             semantic-release-replace-plugin@1.2.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+          PYPI_USERNAME: ${{ env.TWINE_USERNAME }}
+          PYPI_TOKEN: ${{ secrets.TWINE_PASSWORD }}
