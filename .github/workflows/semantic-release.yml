@@ -29,6 +29,7 @@ jobs:
             conventional-changelog-conventionalcommits@8.0.0
             semantic-release@24.1.2
             semantic-release-replace-plugin@1.2.7
+            semantic-release-pypi@3.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PYPI_USERNAME: ${{ env.TWINE_USERNAME }}
