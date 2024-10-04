@@ -1,0 +1,14 @@
+[project]
+name = "django-slack"
+version = "0.1.0"
+description = "Create a Slack bot inside a Django application"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "commonmark-slack>=1.0.0",
+    "croniter>=3.0.3",
+    "django>=5.1.1",
+    "python-crontab>=3.2.0",
+    "slack-bolt>=1.20.1",
+    "slackblocks>=1.0.11",
+]
