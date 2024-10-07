@@ -1,0 +1,12 @@
+name: django-slack
+run-name: Verify the latest django-slack examples image.
+on: [push]
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Docker image build
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          platforms: linux/amd64

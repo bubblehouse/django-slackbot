@@ -1,0 +1,59 @@
+version: '3.7'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: extras/nginx/Dockerfile
+    image: nginx:1.22-snakeoil
+    volumes:
+      - ./extras/web/nginx-uwsgi.conf:/etc/nginx/nginx.conf:ro
+    ports:
+     - "443:443"
+    links:
+     - webapp
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: philchristensen/django-slackbot:latest
+    ports:
+     - "8443:8443"
+    links:
+     - postgres
+     - redis
+    environment:
+      DJANGO_SETTINGS_MODULE: examples.settings
+  chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: philchristensen/django-slackbot:latest
+    command: manage.py run_slackbot
+    links:
+     - postgres
+     - redis
+    environment:
+      DJANGO_SETTINGS_MODULE: examples.settings
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: philchristensen/django-slackbot:latest
+    command: manage.py run_scheduler
+    links:
+     - postgres
+     - redis
+    environment:
+      DJANGO_SETTINGS_MODULE: examples.settings
+  postgres:
+    image: postgres:13.5-bullseye
+    ports:
+     - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: examples
+      POSTGRES_USER: examples
+      POSTGRES_DB: examples
+  redis:
+    image: redis
+    ports:
+     - "6379:6379"
