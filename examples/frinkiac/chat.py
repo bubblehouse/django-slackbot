@@ -7,7 +7,7 @@ from urllib.parse import urlencode, parse_qs, urlparse
 
 import requests
 
-from django_chatbot.chat import app
+from django_slackbot.chat import app
 
 log = logging.getLogger(__name__)
 
