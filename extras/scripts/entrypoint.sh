@@ -3,7 +3,7 @@ set +x
 export PATH="/bin:/usr/bin:/usr/sbin:/usr/local/bin"
 export UWSGI_BUFFER_SIZE=16384
 
-cd /usr/src/app
+cd /usr/src/app || return
 
 if [ "$1" = '' ]; then
     exec uv run uwsgi --ini extras/web/uwsgi.ini

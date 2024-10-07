@@ -32,5 +32,5 @@ jobs:
             semantic-release-pypi@3.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYPI_USERNAME: ${{ env.TWINE_USERNAME }}
+          PYPI_USERNAME: $TWINE_USERNAME
           PYPI_TOKEN: ${{ secrets.TWINE_PASSWORD }}
