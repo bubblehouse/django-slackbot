@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  nginx:
+    volumes:
+      - .:/usr/src/app
+  webapp:
+    environment:
+      GITLAB_TOKEN: ${GITLAB_TOKEN}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SECURITY_TOKEN: ${AWS_SECURITY_TOKEN}
+      SRE_OPSGENIE_KEY:
+    volumes:
+      - .:/usr/src/app
+  chatbot:
+    environment:
+      GITLAB_TOKEN: ${GITLAB_TOKEN}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      SLACK_APP_TOKEN: ${SLACK_APP_TOKEN}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SECURITY_TOKEN: ${AWS_SECURITY_TOKEN}
+      SRE_OPSGENIE_KEY:
+    volumes:
+      - .:/usr/src/app
+  scheduler:
+    environment:
+      GITLAB_TOKEN: ${GITLAB_TOKEN}
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      SLACK_APP_TOKEN: ${SLACK_APP_TOKEN}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SECURITY_TOKEN: ${AWS_SECURITY_TOKEN}
+      SRE_OPSGENIE_KEY:
+    volumes:
+      - .:/usr/src/app
