@@ -1,3 +1,9 @@
+## [1.0.7](https://github.com/philchristensen/django-slackbot/compare/v1.0.6...v1.0.7) (2024-10-07)
+
+### Bug Fixes
+
+* force a new release ([0a16eaf](https://github.com/philchristensen/django-slackbot/commit/0a16eaf3082a5a709d78d6055c0c85c6e85ccaaf))
+
 ## [1.0.6](https://github.com/philchristensen/django-slackbot/compare/v1.0.5...v1.0.6) (2024-10-04)
 
 ### Bug Fixes
