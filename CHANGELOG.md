@@ -1,3 +1,9 @@
+## [1.0.10](https://github.com/philchristensen/django-slackbot/compare/v1.0.9...v1.0.10) (2024-10-08)
+
+### Bug Fixes
+
+* remove unneded cruft ([5772307](https://github.com/philchristensen/django-slackbot/commit/57723078788d6c6031c857b698207d74fc1cc742))
+
 ## [1.0.9](https://github.com/philchristensen/django-slackbot/compare/v1.0.8...v1.0.9) (2024-10-08)
 
 ### Bug Fixes
