@@ -22,11 +22,11 @@ RUN curl -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2
     && rm -rf awscliv2.zip /aws
 
 WORKDIR /usr/src/app
-ENV PYTHON_HOME=/usr
 
 ADD . /usr/src/app
 COPY --from=ghcr.io/astral-sh/uv:0.4.18 /uv /bin/uv
-RUN uv sync --frozen
+RUN uv export --no-hashes --extra dev > requirements.txt
+RUN pip install -r requirements.txt
 
 ADD extras/scripts/entrypoint.sh /entrypoint.sh
 RUN mkdir -p /usr/src/app/static
