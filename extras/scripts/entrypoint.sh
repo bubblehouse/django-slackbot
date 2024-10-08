@@ -13,18 +13,6 @@ elif [ "$1" = 'manage.py' ]; then
     else
         exec python3.12 "$@"
     fi
-elif [ "$1" = 'lint' ]; then
-    pylint -E django_slackbot
-    ret=$?
-    if [[ "$ret" -eq "0" || "$ret" -eq "4" || "$ret" -eq "8" || "$ret" -eq "16" ]]; then
-        exit 0
-    else
-        exit 1
-    fi
-elif [ "$1" = 'test' ]; then
-    nosetests --with-coverage --cover-package=django_slackbot --cover-inclusive --verbosity=2 --nologcapture --nocapture
-elif [ "$1" = 'testcapture' ]; then
-    nosetests --with-coverage --cover-package=django_slackbot --cover-inclusive --verbosity=2
 else
     exec "$@"
 fi

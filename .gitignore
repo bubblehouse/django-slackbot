@@ -11,3 +11,5 @@ wheels/
 node_modules
 
 docker-compose.override.yml
+static/
+.reload

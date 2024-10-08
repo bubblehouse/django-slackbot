@@ -17,9 +17,6 @@ services:
     image: philchristensen/django-slackbot:latest
     ports:
      - "8443:8443"
-    links:
-     - postgres
-     - redis
     environment:
       DJANGO_SETTINGS_MODULE: examples.settings
   chatbot:
@@ -28,9 +25,6 @@ services:
       dockerfile: Dockerfile
     image: philchristensen/django-slackbot:latest
     command: manage.py run_slackbot
-    links:
-     - postgres
-     - redis
     environment:
       DJANGO_SETTINGS_MODULE: examples.settings
   scheduler:
@@ -39,20 +33,5 @@ services:
       dockerfile: Dockerfile
     image: philchristensen/django-slackbot:latest
     command: manage.py run_scheduler
-    links:
-     - postgres
-     - redis
     environment:
       DJANGO_SETTINGS_MODULE: examples.settings
-  postgres:
-    image: postgres:13.5-bullseye
-    ports:
-     - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: examples
-      POSTGRES_USER: examples
-      POSTGRES_DB: examples
-  redis:
-    image: redis
-    ports:
-     - "6379:6379"
