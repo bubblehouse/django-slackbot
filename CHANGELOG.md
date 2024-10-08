@@ -1,3 +1,9 @@
+## [1.0.9](https://github.com/philchristensen/django-slackbot/compare/v1.0.8...v1.0.9) (2024-10-08)
+
+### Bug Fixes
+
+* various bugfixes to deployment test ([636a353](https://github.com/philchristensen/django-slackbot/commit/636a353bda917ddab6541781408a825cb7b94200))
+
 ## [1.0.8](https://github.com/philchristensen/django-slackbot/compare/v1.0.7...v1.0.8) (2024-10-08)
 
 ### Bug Fixes
