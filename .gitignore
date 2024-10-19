@@ -13,3 +13,4 @@ node_modules
 docker-compose.override.yml
 static/
 .reload
+db.sqlite3
