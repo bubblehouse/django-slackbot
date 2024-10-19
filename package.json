@@ -1,6 +1,6 @@
 {
   "name": "django-bubblehouse-slackbot",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "create a Slack App inside a Django application.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,3 +1,9 @@
+## [1.0.11](https://github.com/philchristensen/django-slackbot/compare/v1.0.10...v1.0.11) (2024-10-19)
+
+### Bug Fixes
+
+* include management commands in the library package ([b5883f7](https://github.com/philchristensen/django-slackbot/commit/b5883f7337917bdee8c6da107e7ab4af3653373e))
+
 ## [1.0.10](https://github.com/philchristensen/django-slackbot/compare/v1.0.9...v1.0.10) (2024-10-08)
 
 ### Bug Fixes
