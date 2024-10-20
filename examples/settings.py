@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_slackbot',
-    'examples.frinkiac'
+    'django_slackbot.frinkiac',
+    'django_slackbot.app_home',
 ]
 
 MIDDLEWARE = [
