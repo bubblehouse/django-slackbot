@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/philchristensen/django-slackbot/compare/v1.1.0...v1.1.1) (2024-10-20)
+
+### Bug Fixes
+
+* include optional packages in tarball ([fc50cf5](https://github.com/philchristensen/django-slackbot/commit/fc50cf51010138feb13ef6f053e7651651b81547))
+* typo ([a70cbc5](https://github.com/philchristensen/django-slackbot/commit/a70cbc5efd04b162f961c1b60a874b37569c94b6))
+
 ## [1.1.0](https://github.com/philchristensen/django-slackbot/compare/v1.0.11...v1.1.0) (2024-10-20)
 
 ### Features
