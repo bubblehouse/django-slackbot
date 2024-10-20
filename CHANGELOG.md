@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/philchristensen/django-slackbot/compare/v1.0.11...v1.1.0) (2024-10-20)
+
+### Features
+
+* move optional chat features into dedicated apps ([ca893a3](https://github.com/philchristensen/django-slackbot/commit/ca893a34c40dc3b3ba7f5144a653a142e6ebaaca))
+
 ## [1.0.11](https://github.com/philchristensen/django-slackbot/compare/v1.0.10...v1.0.11) (2024-10-19)
 
 ### Bug Fixes
