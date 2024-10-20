@@ -28,7 +28,7 @@ build-backend = "setuptools.build_meta"
 packages = [
     "django_slackbot",
     "django_slackbot.management",
-    "django_slackbot.management.commands"
+    "django_slackbot.management.commands",
     "django_slackbot.frinkiac",
     "django_slackbot.app_home",
 ]
