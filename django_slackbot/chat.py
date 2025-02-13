@@ -25,5 +25,4 @@ def check_access(client, group_id, user_id):
 
 @app.error
 def custom_error_handler(error, body, logger):
-    logger.exception(f"Error: {error}")
-    logger.debug(f"Request body: {body}")
+    logger.info("Ignoring request: %s", body)
