@@ -1,3 +1,9 @@
+## [1.1.4](https://github.com/bubblehouse/django-slackbot/compare/v1.1.3...v1.1.4) (2025-02-13)
+
+### Bug Fixes
+
+* improve error handling for unhandled requests ([3f25ec3](https://github.com/bubblehouse/django-slackbot/commit/3f25ec3ef13d89519fa47c8c38149dcd5ff413f5))
+
 ## [1.1.3](https://github.com/bubblehouse/django-slackbot/compare/v1.1.2...v1.1.3) (2025-02-13)
 
 ### Bug Fixes
