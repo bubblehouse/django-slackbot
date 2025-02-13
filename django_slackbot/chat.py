@@ -25,4 +25,7 @@ def check_access(client, group_id, user_id):
 
 @app.error
 def custom_error_handler(error, body, logger):
-    logger.info("Ignoring request: %s", body)
+    if body['type'] == 'event_callback':
+        logger.info(f"Can't find handler for {body['type']}: {body['event']['type']}, ignoring.")
+    else:
+        logger.info(f"Can't find handler for {body['type']}: {body}, ignoring.")
