@@ -14,3 +14,4 @@ docker-compose.override.yml
 static/
 .reload
 db.sqlite3
+.DS_Store
