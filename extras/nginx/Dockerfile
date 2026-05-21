@@ -1,5 +1,7 @@
 FROM nginx:1.22
-MAINTAINER Phil Christensen <phil.christensen@benevolent.ai>
+LABEL maintainer="Phil Christensen <phil@bubblehouse.org>"
 
-# Install base dependencies
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y ssl-cert
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+       ssl-cert \
+    && rm -rf /var/lib/apt/lists/*

@@ -1,37 +1,53 @@
-FROM public.ecr.aws/docker/library/python:3.12.7-slim-bullseye
+FROM public.ecr.aws/docker/library/python:3.12.7-slim-bullseye AS builder
+
+COPY --from=ghcr.io/astral-sh/uv:0.4.18 /uv /bin/uv
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+       build-essential libpq-dev libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV UV_LINK_MODE=copy \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PROJECT_ENVIRONMENT=/usr/app
+
+WORKDIR /usr/app/src
+
+COPY pyproject.toml uv.lock /usr/app/src/
+RUN uv sync --frozen --no-install-project --no-dev --extra runtime
+
+COPY django_slackbot /usr/app/src/django_slackbot
+COPY examples /usr/app/src/examples
+COPY extras /usr/app/src/extras
+COPY manage.py README.md LICENSE /usr/app/src/
+
+RUN uv sync --frozen --no-editable --no-dev --extra runtime
+
+
+FROM public.ecr.aws/docker/library/python:3.12.7-slim-bullseye AS runtime
 LABEL Name="django-slackbot"
+LABEL Version="1.1.4"
 
 EXPOSE 8443
 
-# Install base dependencies
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-       apt-transport-https curl unzip gnupg2 gcc g++ libc-dev libssl-dev libpq-dev \
-       sqlite3 ssl-cert git \
-    && rm -rf /var/lib/apt/lists/*
+       libpq5 sqlite3 ssl-cert \
+    && rm -rf /var/lib/apt/lists/* \
+    && chgrp www-data /etc/ssl/private/ \
+    && chmod g+rx /etc/ssl/private/ \
+    && chgrp www-data /etc/ssl/private/ssl-cert-snakeoil.key \
+    && chmod g+r /etc/ssl/private/ssl-cert-snakeoil.key
 
-RUN chgrp www-data /etc/ssl/private/
-RUN chmod g+rx /etc/ssl/private/
-RUN chgrp www-data /etc/ssl/private/ssl-cert-snakeoil.key
-RUN chmod g+r /etc/ssl/private/ssl-cert-snakeoil.key
+COPY --from=builder /usr/app /usr/app
 
-# Install AWS CLI for debugging
-RUN curl -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
-    && unzip awscliv2.zip \
-    && ./aws/install \
-    && rm -rf awscliv2.zip /aws
+ENV PATH="/usr/app/bin:$PATH" \
+    DJANGO_SETTINGS_MODULE=examples.settings
 
-WORKDIR /usr/src/app
+WORKDIR /usr/app/src
 
-ADD . /usr/src/app
-COPY --from=ghcr.io/astral-sh/uv:0.4.18 /uv /bin/uv
-RUN uv export --no-hashes --extra dev > requirements.txt
-RUN pip install -r requirements.txt
+RUN mkdir -p /usr/app/src/static \
+    && chgrp www-data /usr/app/src/static/ \
+    && chmod ug+rwx /usr/app/src/static/
 
-ADD extras/scripts/entrypoint.sh /entrypoint.sh
-RUN mkdir -p /usr/src/app/static
-RUN chgrp www-data /usr/src/app/static/
-RUN chmod ug+rwx /usr/src/app/static/
-
-# Custom entrypoint for improved ad-hoc command support
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/app/src/extras/scripts/entrypoint.sh"]
