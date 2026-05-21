@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 __version__ = "1.1.4"
 
-def get_version():
-    return __version__
 
-default_app_config = 'django_slackbot.apps.DjangoSlackBotConfig'
+def get_version() -> str:
+    return __version__
