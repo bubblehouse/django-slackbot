@@ -33,9 +33,11 @@ oauth_config:
       - app_mentions:read
       - im:history
       - commands
+      - groups:read
 settings:
   event_subscriptions:
     bot_events:
+      - app_home_opened
       - app_mention
       - message.channels
       - message.im
