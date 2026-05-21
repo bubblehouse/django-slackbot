@@ -1,6 +1,6 @@
 #!/bin/bash
 set +x
-export PATH="/usr/app/bin:/bin:/usr/bin:/usr/sbin:/usr/local/bin"
+export PATH="/usr/app/venv/bin:/bin:/usr/bin:/usr/sbin:/usr/local/bin"
 export UWSGI_BUFFER_SIZE=16384
 
 cd /usr/app/src || return

@@ -9,7 +9,7 @@ RUN apt-get update \
 
 ENV UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
-    UV_PROJECT_ENVIRONMENT=/usr/app
+    UV_PROJECT_ENVIRONMENT=/usr/app/venv
 
 WORKDIR /usr/app/src
 
@@ -41,7 +41,7 @@ RUN apt-get update \
 
 COPY --from=builder /usr/app /usr/app
 
-ENV PATH="/usr/app/bin:$PATH" \
+ENV PATH="/usr/app/venv/bin:$PATH" \
     DJANGO_SETTINGS_MODULE=examples.settings
 
 WORKDIR /usr/app/src
