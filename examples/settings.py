@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_celery_results",
     "django_slackbot",
     "django_slackbot.frinkiac",
     "django_slackbot.app_home",
@@ -137,6 +138,9 @@ LOGGING = {
         "require_debug_true": {
             "()": "django.utils.log.RequireDebugTrue",
         },
+        "drop_slack_bolt_verbose_dumps": {
+            "()": "examples.log_filters.DropSlackBoltVerboseDumps",
+        },
     },
     "formatters": {
         "django.server": {
@@ -148,7 +152,7 @@ LOGGING = {
     "handlers": {
         "console": {
             "level": "DEBUG",
-            "filters": ["require_debug_true"],
+            "filters": ["require_debug_true", "drop_slack_bolt_verbose_dumps"],
             "class": "logging.StreamHandler",
         },
         "django.server": {
@@ -182,5 +186,7 @@ LOGGING = {
             "propagate": True,
         },
         "slack_bolt": {"level": "DEBUG", "handlers": ["console"], "propagate": False},
+        "slack_bolt.App": {"level": "DEBUG", "handlers": ["console"], "propagate": False},
+        "slack_sdk": {"level": "DEBUG", "handlers": ["console"], "propagate": False},
     },
 }

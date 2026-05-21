@@ -2,24 +2,29 @@ import logging
 import os
 from typing import Any, Callable
 
-from crontab import CronTab
+from celery import shared_task
 from slack_bolt import App
 from slack_sdk import WebClient
+
+from django_slackbot.celery_support import CHAT_SCHEDULES
 
 app = App(
     token=os.environ.get("SLACK_BOT_TOKEN"),
     raise_error_for_unhandled_request=True,
 )
+# slack_bolt.App.__init__ calls _configure_from_root which pins the App
+# logger to the root logger's level (WARNING by default), overriding any
+# Django LOGGING config. Re-apply DEBUG so socket-mode session/event logs
+# from the embedded SocketModeClient become visible.
+app.logger.setLevel(logging.DEBUG)
 
-tab = CronTab()
 
-
-def app_schedule(cron_expr: str) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
-    def _schedule(f: Callable[..., Any]) -> Callable[..., Any]:
-        job = tab.new(command="/bin/true")
-        job.setall(cron_expr)
-        job.func = f
-        return f
+def app_schedule(cron_expr: str) -> Callable[[Callable[..., Any]], Any]:
+    def _schedule(f: Callable[..., Any]) -> Any:
+        task_name = f"{f.__module__}.{f.__name__}"
+        task = shared_task(name=task_name)(f)
+        CHAT_SCHEDULES.append((task_name, cron_expr, task_name))
+        return task
 
     return _schedule
 

@@ -20,6 +20,9 @@ services:
       - 8443:8443
     environment:
       DJANGO_SETTINGS_MODULE: examples.settings
+      CELERY_BROKER_URL: redis://redis:6379/0
+    depends_on:
+      - redis
   chatbot:
     build:
       context: .
@@ -28,11 +31,49 @@ services:
     command: manage.py run_slackbot
     environment:
       DJANGO_SETTINGS_MODULE: examples.settings
-  scheduler:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      PYTHONUNBUFFERED: '1'
+    depends_on:
+      - redis
+  worker:
     build:
       context: .
       dockerfile: Dockerfile
     image: philchristensen/django-slackbot:latest
-    command: manage.py run_scheduler
+    command:
+      - celery
+      - -A
+      - examples
+      - worker
+      - --concurrency=2
+      - -E
+      - -l
+      - INFO
     environment:
       DJANGO_SETTINGS_MODULE: examples.settings
+      CELERY_BROKER_URL: redis://redis:6379/0
+      PYTHONUNBUFFERED: '1'
+    depends_on:
+      - redis
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: philchristensen/django-slackbot:latest
+    command:
+      - celery
+      - -A
+      - examples
+      - beat
+      - -l
+      - INFO
+    environment:
+      DJANGO_SETTINGS_MODULE: examples.settings
+      CELERY_BROKER_URL: redis://redis:6379/0
+      PYTHONUNBUFFERED: '1'
+    depends_on:
+      - redis
+  redis:
+    image: redis:7
+    ports:
+      - 6379:6379

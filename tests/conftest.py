@@ -25,6 +25,27 @@ def pytest_unconfigure(config):
 
 
 @pytest.fixture
+def celery_eager():
+    """Run celery tasks inline; required for end-to-end task tests.
+
+    The celery app is configured via examples/celeryconfig.py (not Django
+    settings), so eager mode is set on the live ``app.conf`` rather than via
+    ``@override_settings``.
+    """
+    from examples.celery import app
+
+    prev_always = app.conf.task_always_eager
+    prev_propagates = app.conf.task_eager_propagates
+    app.conf.task_always_eager = True
+    app.conf.task_eager_propagates = True
+    try:
+        yield
+    finally:
+        app.conf.task_always_eager = prev_always
+        app.conf.task_eager_propagates = prev_propagates
+
+
+@pytest.fixture
 def ack(mocker):
     return mocker.Mock(name="ack")
 

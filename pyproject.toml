@@ -9,9 +9,10 @@ authors = [
 ]
 license = {text = "AGPL-3.0-only"}
 dependencies = [
+    "celery[redis]>=5.4",
     "commonmark-slack>=1.0.0",
-    "croniter>=3.0.3",
-    "python-crontab>=3.2.0",
+    "django-celery-results>=2.5",
+    "redis>=5.0",
     "requests>=2.32.3",
     "slack-bolt>=1.20.1",
     "slackblocks>=1.0.11",

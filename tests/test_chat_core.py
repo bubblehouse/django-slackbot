@@ -3,14 +3,16 @@ import logging
 import pytest
 
 from django_slackbot import chat as chat_core
+from django_slackbot.celery_support import CHAT_SCHEDULES
 
 
 @pytest.fixture(autouse=True)
-def _clear_crontab():
+def _clear_chat_schedules():
     """Stop scheduled jobs added by one test from leaking into the next."""
-    original_jobs = list(chat_core.tab.crons)
+    original = list(CHAT_SCHEDULES)
     yield
-    chat_core.tab.crons = original_jobs
+    CHAT_SCHEDULES.clear()
+    CHAT_SCHEDULES.extend(original)
 
 
 class TestCheckAccess:
@@ -32,33 +34,6 @@ class TestCheckAccess:
     def test_returns_false_when_group_empty(self, slack_client):
         slack_client.usergroups_users_list.return_value = {"ok": True, "users": []}
         assert chat_core.check_access(slack_client, "SGROUP1", "U1") is False
-
-
-class TestAppSchedule:
-    def test_decorator_registers_job_with_correct_func(self):
-        @chat_core.app.schedule("*/5 * * * *")
-        def my_task():
-            return "ran"
-
-        new_jobs = chat_core.tab.crons
-        added = [j for j in new_jobs if getattr(j, "func", None) is my_task]
-        assert len(added) == 1
-        assert added[0].func is my_task
-
-    def test_decorator_returns_original_function(self):
-        def task():
-            return 42
-
-        decorated = chat_core.app.schedule("0 * * * *")(task)
-        assert decorated is task
-
-    def test_cron_string_is_applied(self):
-        @chat_core.app.schedule("15 4 * * 1")
-        def weekly_task():
-            pass
-
-        added = [j for j in chat_core.tab.crons if getattr(j, "func", None) is weekly_task]
-        assert str(added[0]).startswith("15 4 * * 1")
 
 
 class TestCustomErrorHandler:
