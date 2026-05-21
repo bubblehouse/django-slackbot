@@ -98,10 +98,11 @@ def _encode_overlay(
     if not 0 <= size <= 255:
         raise ValueError(f"size out of range: {size}")
 
-    color = tuple(color) if color else DEFAULT_COLOR
+    resolved_color: tuple[int, int, int, int] = (
+        DEFAULT_COLOR if color is None else (int(color[0]), int(color[1]), int(color[2]), int(color[3]))
+    )
 
-    has_color = color != DEFAULT_COLOR
-    has_font = bool(font)
+    has_color = resolved_color != DEFAULT_COLOR
     has_size = size != 0
     has_align = align_value != 0
     has_timing = start != 0 or end != 0
@@ -109,7 +110,7 @@ def _encode_overlay(
     flags = 0
     if has_color:
         flags |= FLAG_COLOR
-    if has_font:
+    if font:
         flags |= FLAG_FONT
     if has_size:
         flags |= FLAG_SIZE
@@ -131,8 +132,8 @@ def _encode_overlay(
     buf.extend(text_bytes)
 
     if has_color:
-        buf.extend([c & 0xFF for c in color])
-    if has_font:
+        buf.extend([c & 0xFF for c in resolved_color])
+    if font:
         if font in FONT_TABLE:
             buf.append(FONT_TABLE[font])
         else:
