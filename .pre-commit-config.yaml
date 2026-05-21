@@ -1,23 +1,48 @@
+---
 repos:
-- repo: https://github.com/PyCQA/pylint
-  rev: v3.1.0
-  hooks:
-  - id: pylint
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
-  hooks:
-  - id: trailing-whitespace
-  - id: fix-encoding-pragma
-  - id: end-of-file-fixer
-  - id: check-merge-conflict
-- repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.5.5
-  hooks:
-  - id: forbid-crlf
-  - id: forbid-tabs
-- repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-  rev: v9.14.0
-  hooks:
-  - id: commitlint
-    stages: [commit-msg]
-    additional_dependencies: ['@commitlint/config-conventional']
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.2
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.30.0
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, '5.1']
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: env DJANGO_SETTINGS_MODULE=examples.settings uv run pylint
+        language: system
+        types: [python]
+  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+    rev: v0.1.0
+    hooks:
+      - id: dockerfilelint
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: mixed-line-ending
+  - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+    rev: 0.2.3
+    hooks:
+      - id: yamlfmt
+        args: [--mapping, '2', --sequence, '4', --offset, '2']
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.24.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        additional_dependencies: ['@commitlint/config-conventional']
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.44.0
+    hooks:
+      - id: markdownlint-fix
+        exclude: ^CHANGELOG\.md

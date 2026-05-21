@@ -10,8 +10,13 @@ wheels/
 .venv
 node_modules
 
+compose.override.yaml
 docker-compose.override.yml
 static/
 .reload
 db.sqlite3
 .DS_Store
+*.pid
+dropin.cache
+.coverage
+.pytest_cache/
