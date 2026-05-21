@@ -1,4 +1,3 @@
-import base64
 import json
 import logging
 import random
@@ -8,6 +7,7 @@ from urllib.parse import parse_qs, urlencode, urlparse
 import requests
 
 from django_slackbot.chat import app
+from django_slackbot.frinkiac.comic_payload import build_meme_url
 
 log = logging.getLogger(__name__)
 
@@ -180,7 +180,12 @@ def create_confirmation_message(site_url: str, query: str, image_url: str) -> di
 
 
 def update_meme_text(image_url: str, meme_text: str) -> str:
-    image_url = image_url.replace("/img/", "/meme/")
-    url, _ = image_url.split("?", maxsplit=1) if "?" in image_url else (image_url, "")
-    meme64 = base64.b64encode(meme_text.encode("utf8"))
-    return url + "?b64lines=" + meme64.decode("utf8")
+    # The old /meme/{episode}/{ts}.jpg?b64lines=<base64-text> endpoint was
+    # retired by both frinkiac and morbotron (now 410). The replacement is
+    # /comic/img?b=<urlsafe_base64(binary_payload)>; see comic_payload.py for
+    # the wire format.
+    parsed = urlparse(image_url)
+    site_url = f"{parsed.scheme}://{parsed.hostname}"
+    _, _, episode, timestamp_jpg = parsed.path.split("/")
+    timestamp = int(timestamp_jpg.split(".")[0])
+    return build_meme_url(site_url, episode, timestamp, meme_text)

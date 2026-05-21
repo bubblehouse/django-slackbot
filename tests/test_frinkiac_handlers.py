@@ -144,4 +144,4 @@ class TestUpdateMeme:
         assert kwargs["response_type"] == "ephemeral"
         assert kwargs["replace_original"] is True
         image_url = kwargs["blocks"][0]["image_url"]
-        assert image_url.startswith("https://frinkiac.com/meme/S01E02/12345.jpg?b64lines=")
+        assert image_url.startswith("https://frinkiac.com/comic/img?b=")

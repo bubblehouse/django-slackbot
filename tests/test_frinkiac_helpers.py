@@ -112,26 +112,41 @@ class TestCreateConfirmationMessage:
 
 
 class TestUpdateMemeText:
-    def test_rewrites_img_to_meme(self):
-        result = update_meme_text("https://frinkiac.com/img/S01E02/12345.jpg", "Hello")
-        assert result.startswith("https://frinkiac.com/meme/S01E02/12345.jpg?b64lines=")
+    @staticmethod
+    def _decode(url):
+        """Decode the urlsafe-base64 'b' query param into raw payload bytes."""
+        _, b = url.split("?b=", 1)
+        return base64.urlsafe_b64decode(b + "=" * (-len(b) % 4))
 
-    def test_base64_encodes_meme_text(self):
-        result = update_meme_text("https://frinkiac.com/img/A/B.jpg", "Hello")
-        encoded = result.split("?b64lines=", 1)[1]
-        assert base64.b64decode(encoded).decode("utf8") == "Hello"
+    def test_targets_comic_img_endpoint(self):
+        result = update_meme_text("https://frinkiac.com/img/S01E02/12345.jpg", "Hello")
+        assert result.startswith("https://frinkiac.com/comic/img?b=")
+
+    def test_payload_contains_episode_timestamp_and_text(self):
+        result = update_meme_text("https://frinkiac.com/img/S01E02/12345.jpg", "Hello")
+        payload = self._decode(result)
+        # version=1, kind=2 (comic), panels=1, episode_len=6, episode='S01E02', ts=12345 LE
+        assert payload[0] == 1
+        assert payload[1] == 2
+        assert payload[2] == 1
+        assert payload[3] == 6
+        assert payload[4:10] == b"S01E02"
+        assert int.from_bytes(payload[10:14], "little") == 12345
+        assert b"Hello" in payload
 
     def test_strips_existing_query_string(self):
-        result = update_meme_text("https://frinkiac.com/img/A/B.jpg?old=1&other=2", "World")
+        result = update_meme_text("https://frinkiac.com/img/S01E02/12345.jpg?old=1&other=2", "World")
         assert "old=1" not in result
         assert "other=2" not in result
-        encoded = result.split("?b64lines=", 1)[1]
-        assert base64.b64decode(encoded).decode("utf8") == "World"
+        assert b"World" in self._decode(result)
 
     def test_handles_unicode_text(self):
-        result = update_meme_text("https://frinkiac.com/img/A/B.jpg", "café — 🎉")
-        encoded = result.split("?b64lines=", 1)[1]
-        assert base64.b64decode(encoded).decode("utf8") == "café — 🎉"
+        result = update_meme_text("https://frinkiac.com/img/S01E02/12345.jpg", "café — 🎉")
+        assert "café — 🎉".encode("utf-8") in self._decode(result)
+
+    def test_works_for_morbotron(self):
+        result = update_meme_text("https://morbotron.com/img/S02E18/671253.jpg", "Doomed!")
+        assert result.startswith("https://morbotron.com/comic/img?b=")
 
 
 class TestHandler:
