@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Django runserver",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "django",
+            "args": ["runserver", "0.0.0.0:8000"],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "examples.settings"
+            }
+        },
+        {
+            "name": "Slack listener",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "django",
+            "args": ["run_slackbot"],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "examples.settings"
+            }
+        },
+        {
+            "name": "Cron scheduler",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "django",
+            "args": ["run_scheduler"],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "examples.settings"
+            }
+        }
+    ]
+}
