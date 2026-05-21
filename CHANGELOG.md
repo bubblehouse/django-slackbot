@@ -1,3 +1,14 @@
+## [1.3.0](https://github.com/bubblehouse/django-slackbot/compare/v1.2.0...v1.3.0) (2026-05-21)
+
+### Features
+
+* **scheduler:** replace in-process scheduler with celery worker + beat ([c28682f](https://github.com/bubblehouse/django-slackbot/commit/c28682fc753c864b8528dfb8c5e60cd04c08238c))
+
+### Bug Fixes
+
+* **frinkiac:** narrow color/font types so mypy stops complaining ([6912aa7](https://github.com/bubblehouse/django-slackbot/commit/6912aa7632128c77b18fb2ea9410a839ef8a46bb))
+* **frinkiac:** retarget meme rendering at /comic/img binary payload endpoint ([be47bb6](https://github.com/bubblehouse/django-slackbot/commit/be47bb64563e96637d103e0002c0de952b4a36c6))
+
 ## [1.2.0](https://github.com/bubblehouse/django-slackbot/compare/v1.1.4...v1.2.0) (2026-05-21)
 
 ### Features
