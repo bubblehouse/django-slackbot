@@ -4,6 +4,10 @@ version = "1.1.4"
 description = "Create a Slack bot inside a Django application"
 readme = "README.md"
 requires-python = ">=3.12"
+authors = [
+    {name = "Phil Christensen", email = "phil@bubblehouse.org"},
+]
+license = {text = "AGPL-3.0-only"}
 dependencies = [
     "commonmark-slack>=1.0.0",
     "croniter>=3.0.3",
@@ -14,7 +18,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = [
+runtime = [
     "django>=5.1.1",
     "uwsgi>=2.0.27",
     "watchdog>=5.0.3",
@@ -31,4 +35,49 @@ packages = [
     "django_slackbot.management.commands",
     "django_slackbot.frinkiac",
     "django_slackbot.app_home",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+
+[tool.coverage.run]
+source = ["django_slackbot"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "examples.settings"
+addopts = "--spec --cov=django_slackbot --cov-report=term-missing --ds=examples.settings"
+spec_test_format = "{result} {docstring_summary}"
+python_files = ["test_*.py"]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[dependency-groups]
+dev = [
+    "django>=5.1.1",
+    "uwsgi>=2.0.27",
+    "watchdog>=5.0.3",
+    "ruff>=0.9.0",
+    "pylint>=3.1.0",
+    "pylint-django>=2.5.5",
+    "pylint-pytest>=1.1.7",
+    "mypy>=1.0.0",
+    "pytest>=8.0.0",
+    "pytest-spec>=6.0.0",
+    "pytest-cov>=4.1.0",
+    "pytest-django>=4.8",
+    "pytest-mock>=3.12",
+    "pytest-xdist>=3.5",
+    "coverage>=7.4.4",
+    "responses>=0.25",
+    "freezegun>=1.5",
 ]
