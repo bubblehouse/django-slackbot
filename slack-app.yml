@@ -1,7 +1,8 @@
+---
 display_information:
   name: glados
   description: Cake and grief counseling will be available at the conclusion of the test. Thank you for helping us help you help us all.
-  background_color: "#134747"
+  background_color: '#134747'
 features:
   app_home:
     home_tab_enabled: true

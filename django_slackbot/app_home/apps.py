@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 
 class AppHomeConfig(AppConfig):
-    name = 'django_slackbot.app_home'
+    name = "django_slackbot.app_home"

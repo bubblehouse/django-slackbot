@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 
 class FrinkiacConfig(AppConfig):
-    name = 'django_slackbot.frinkiac'
+    name = "django_slackbot.frinkiac"
