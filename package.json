@@ -1,6 +1,6 @@
 {
   "name": "django-bubblehouse-slackbot",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "Create a Slack bot inside a Django application",
   "author": "Phil Christensen <phil@bubblehouse.org>",
   "license": "AGPL-3.0-only",

@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/bubblehouse/django-slackbot/compare/v1.1.4...v1.2.0) (2026-05-21)
+
+### Features
+
+* **types:** add type annotations to chat handlers and management commands ([43ec44c](https://github.com/bubblehouse/django-slackbot/commit/43ec44c63af5986b48e0d8b811304b8462ca8437))
+
+### Bug Fixes
+
+* **docker:** relocate venv to /usr/app/venv to avoid WORKDIR collision ([edf2e7c](https://github.com/bubblehouse/django-slackbot/commit/edf2e7cb04d2c3d7d6d92398594b87c85acef436))
+
 ## [1.1.4](https://github.com/bubblehouse/django-slackbot/compare/v1.1.3...v1.1.4) (2025-02-13)
 
 ### Bug Fixes
