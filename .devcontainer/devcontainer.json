@@ -1,0 +1,26 @@
+{
+  "name": "django-slackbot",
+  "dockerComposeFile": [
+    "../compose.yaml",
+    "../compose.devcontainer.yaml"
+  ],
+  "service": "webapp",
+  "workspaceFolder": "/usr/app/src",
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/root/.claude,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/app/bin/python"
+      },
+      "extensions": [
+        "ms-python.debugpy",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "DavidAnson.vscode-markdownlint"
+      ]
+    }
+  }
+}

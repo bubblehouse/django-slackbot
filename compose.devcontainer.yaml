@@ -1,0 +1,8 @@
+---
+services:
+  webapp:
+    command: /bin/sh -c "while sleep 1000; do :; done"
+  chatbot:
+    command: /bin/sh -c "while sleep 1000; do :; done"
+  scheduler:
+    command: /bin/sh -c "while sleep 1000; do :; done"
