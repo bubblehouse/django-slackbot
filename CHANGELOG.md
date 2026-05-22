@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/bubblehouse/django-slackbot/compare/v1.3.0...v1.3.1) (2026-05-22)
+
+### Bug Fixes
+
+* allow chat module to import without SLACK_BOT_TOKEN configured ([1706714](https://github.com/bubblehouse/django-slackbot/commit/1706714028b8d1b18f64fae9df1cd95f6cca90aa))
+
 ## [1.3.0](https://github.com/bubblehouse/django-slackbot/compare/v1.2.0...v1.3.0) (2026-05-21)
 
 ### Features

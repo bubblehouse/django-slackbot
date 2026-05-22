@@ -26,7 +26,7 @@ RUN uv sync --frozen --no-editable --no-dev --extra runtime
 
 FROM public.ecr.aws/docker/library/python:3.12.7-slim-bullseye AS runtime
 LABEL Name="django-slackbot"
-LABEL Version="1.3.0"
+LABEL Version="1.3.1"
 
 EXPOSE 8443
 
