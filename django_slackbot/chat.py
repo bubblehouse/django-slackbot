@@ -8,9 +8,13 @@ from slack_sdk import WebClient
 
 from django_slackbot.celery_support import CHAT_SCHEDULES
 
+_SLACK_BOT_TOKEN = os.environ.get("SLACK_BOT_TOKEN")
 app = App(
-    token=os.environ.get("SLACK_BOT_TOKEN"),
+    token=_SLACK_BOT_TOKEN or "xoxb-not-configured",
     raise_error_for_unhandled_request=True,
+    # When no real token is configured (CI, lint, IDE introspection), skip the
+    # auth.test API call that App.__init__ otherwise performs against Slack.
+    token_verification_enabled=bool(_SLACK_BOT_TOKEN),
 )
 # slack_bolt.App.__init__ calls _configure_from_root which pins the App
 # logger to the root logger's level (WARNING by default), overriding any
