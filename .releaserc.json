@@ -72,7 +72,7 @@
       "@semantic-release/exec",
       {
         "prepareCmd": "uv build",
-        "publishCmd": "docker buildx imagetools create -t ghcr.io/bubblehouse/django-slackbot:${nextRelease.version} -t ghcr.io/bubblehouse/django-slackbot:latest ghcr.io/bubblehouse/django-slackbot:sha-$IMAGE_SHA-amd64 ghcr.io/bubblehouse/django-slackbot:sha-$IMAGE_SHA-arm64"
+        "publishCmd": "uv publish --token \"$TWINE_PASSWORD\" && docker buildx imagetools create -t ghcr.io/bubblehouse/django-slackbot:${nextRelease.version} -t ghcr.io/bubblehouse/django-slackbot:latest ghcr.io/bubblehouse/django-slackbot:sha-$IMAGE_SHA-amd64 ghcr.io/bubblehouse/django-slackbot:sha-$IMAGE_SHA-arm64"
       }
     ],
     [
